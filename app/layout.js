@@ -1,5 +1,6 @@
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import Link from "next/link";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -24,7 +25,7 @@ export default function RootLayout({ children }) {
       >
         <div className="flex justify-between bg-slate-900 font-mono items-center">
           <header className=" p-4 text-white text-3xl font-bold pl-5">Moviezz</header>
-          <button className="bg-blue-300 m-5 px-5 py-3 text-black font-bold rounded-sm">Watched Movies</button>
+          <Link href = {"/AddMovie"}><button className="bg-blue-300 m-5 px-5 py-3 text-black font-bold rounded-sm">Watched Movies</button></Link>
         </div>
         {children}
       </body>
