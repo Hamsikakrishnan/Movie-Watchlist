@@ -1,14 +1,16 @@
+"use client";
 import {db} from "../../firebaseConfig";
-import {addDoc, collection, deleteDoc, getDocs, doc} from "firebase/firestore";
+import {addDoc, collection, getDocs} from "firebase/firestore";
 import {useEffect, useState} from "react";
 
-export default function UnwatchedMovies() {
+export default function watched() {
     const [movies, setMovies] = useState([]);
     const [expanded, setExpanded] = useState(false);
     const genres = ["Horror", "Comedy", "Thriller", "Action", "Romance", "Mystery", "Animation"];
     useEffect(() => {
         const getMovies = async () => {
-            const querySnapshot = await getDocs(collection(db, "not_watched_movies"));
+          
+            const querySnapshot = await getDocs(collection(db, "watched_movies"));
             const movies = querySnapshot.docs.map((doc) => {
               return { id: doc.id, ...doc.data() };
             });
@@ -18,17 +20,9 @@ export default function UnwatchedMovies() {
         };
         getMovies();
       }, []);
-    const markAsWatched = async (movie) => {
-      await addDoc(collection(db, "watched_movies"),{
-        movie: movie.movie,
-        genre: movie.genre,
-        description: movie.description,
-      });
-      await deleteDoc(doc(db, "not_watched_movies", movie.id));
-      setMovies(prevMovies => prevMovies.filter(m => m.id !== movie.id));
-    };
+      
     return(
-        <div className="p-5">
+        <div className="p-5 bg-black">
             {/* <ul>
                 {movies.map((movie) => (
                 <li key={movie.id} className="flex text-white items-center justify-between p-2 border-b">
@@ -51,7 +45,7 @@ export default function UnwatchedMovies() {
                                 <div key={movie.id} className="p-4 bg-gray-800 text-white rounded">
                                     <h3 className="text-lg font-semibold">{movie.movie}</h3>
                                     <p className={`text-sm ${expanded ? "" : "line-clamp-2 overflow-hidden"}`}>{movie.description}</p>
-                                    <div className="flex justify-between">
+                                    
                                       {movie.description.length > 100 && (
                                           <button 
                                               className="text-blue-400 text-sm mt-1" 
@@ -60,14 +54,6 @@ export default function UnwatchedMovies() {
                                               {expanded ? "See Less" : "See More"}
                                           </button>
                                       )}
-                                    <select
-                                                value={movie.status || "Unwatched"}
-                                                onChange={(e) => markAsWatched(movie)}
-                                                className="mt-2 p-1 bg-gray-700 text-white rounded"
-                                            >
-                                                <option value="Unwatched">Unwatched</option>
-                                                <option value="Watched">Watched</option>
-                                    </select></div>
                                 </div>
                             ))}
                         </div>

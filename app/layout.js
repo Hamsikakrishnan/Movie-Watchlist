@@ -24,8 +24,8 @@ export default function RootLayout({ children }) {
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <div className="flex justify-between bg-slate-900 font-mono items-center">
-          <header className=" p-4 text-white text-3xl font-bold pl-5">Moviezz</header>
-          <Link href = {"/AddMovie"}><button className="bg-blue-300 m-5 px-5 py-3 text-black font-bold rounded-sm">Watched Movies</button></Link>
+          <Link href="/"><header className=" p-4 text-white text-3xl font-bold pl-5">Moviezz</header></Link>
+          <Link href = {"/watched"}><button className="bg-blue-300 m-5 px-5 py-3 text-black font-bold rounded-sm">Watched Movies</button></Link>
         </div>
         {children}
       </body>

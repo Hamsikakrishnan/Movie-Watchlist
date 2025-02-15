@@ -23,7 +23,7 @@ export default function AddMovie() {
         setMov({ movie: "", genre: "", description: "" });  
         router.push("/");  
     };
-    const genres = ["Select the genre", "Horror", "Comedy", "Thriller", "Romance", "Mystery", "Animation", "Other"];
+    const genres = ["Select the genre", "Horror", "Comedy", "Action", "Thriller", "Romance", "Mystery", "Animation", "Other"];
     return(
         <form onSubmit={addMovie} className="flex flex-col items-center justify-center font-mono bg-black">
             <input type="text" 
