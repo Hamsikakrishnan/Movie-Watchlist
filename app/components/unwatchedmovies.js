@@ -27,6 +27,11 @@ export default function UnwatchedMovies() {
       await deleteDoc(doc(db, "not_watched_movies", movie.id));
       setMovies(prevMovies => prevMovies.filter(m => m.id !== movie.id));
     };
+
+    const deleteMovie = async(id) =>{
+      await deleteDoc(doc(db, "not_watched_movies", id));
+      setMovies(prevMovies => prevMovies.filter(m => m.id !== id));
+    }
     return(
         <div className="p-5">
             {/* <ul>
@@ -67,7 +72,8 @@ export default function UnwatchedMovies() {
                                             >
                                                 <option value="Unwatched">Unwatched</option>
                                                 <option value="Watched">Watched</option>
-                                    </select></div>
+                                    </select>
+                                    <button onClick={() => deleteMovie(movie.id)} className="mt-2 px-2 py-1 bg-gray-700 text-white rounded">Delete</button></div>
                                 </div>
                             ))}
                         </div>
